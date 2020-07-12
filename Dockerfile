@@ -1,4 +1,4 @@
-ROM ubuntu:latest AS build
+FROM ubuntu:latest AS build
 
 ARG XMRIG_VERSION='v5.8.1'
 
