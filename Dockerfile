@@ -15,7 +15,7 @@ RUN mkdir build && cd build && cmake .. -DOPENSSL_USE_STATIC_LIBS=TRUE && make
 FROM ubuntu:latest
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libhwloc5    
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libhwloc-dev   
 RUN useradd -ms /bin/bash monero
 USER monero
 WORKDIR /home/monero
